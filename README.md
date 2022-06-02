@@ -1,8 +1,7 @@
-C++ solution for Leetcode
+Leetcode C++ solutions
 
-| Level  | Count |
-|--------|-------|
-| Easy   | 2     |
-| Medium | 5     |
-| Hard   | 0     |
-
+| Level  | Count  |
+|--------|--------|
+| Easy   | 2/575  |
+| Medium | 6/1216 |
+| Hard   | 0/499  |
