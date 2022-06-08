@@ -9,24 +9,20 @@ ll n, m;
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(0);
-	ll T, i, j, x, v, k, ans;
+	ll T, i, j, k, x, v, ans;
 	cin >> T;
 	while(T--) {
 		cin >> n >> k;
-		vector<pl> a;
-		string s;
-		cin >> s;
+		vector<ll> a;
+		char c;
 		ans = 2e6;
-		ll l = 0, r = 0, w=0;
-		w = s[0] == 'W' ? 1 : 0;
-		while (l < s.size()) {
-			while (r-l+1 <k && r < s.size()-1) {
-				r++;
-				if (s[r] == 'W') w++;
-			}
-			if (r-l+1 >= k && w < ans) ans = w;
-			if (s[l] == 'W') w--;
-			l++;
+		a.push_back(0);
+		for (i=0;i<n;i++) {
+			cin >> c;
+			a.push_back(a.back()+(c == 'W'));
+		}
+		for (i=0;i<=n-k;i++) {
+			ans = min(ans, a[i+k] - a[i]);
 		}
 		cout << ans << endl;
 	}
