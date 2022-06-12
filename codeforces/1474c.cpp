@@ -5,6 +5,7 @@ typedef pair<int,int> pi;
 typedef pair<long long,long long> pl;
 #define endl "\n"
 ll n, m;
+int cnt[1000001];
 
 int main() {
 	ios_base::sync_with_stdio(false);
@@ -13,49 +14,43 @@ int main() {
 	cin >> T;
 	while(T--) {
 		cin >> n;
-		multiset<ll,greater<ll>> c;
-		vector<pl> b;
-		ans = 0;
-		for (i=0;i<n*2;i++) {
-			cin >> x;
-			c.insert(x);
-		}
+		vector<ll> a(n*2);
+		vector<ll> r(n*2);
+		for (i=0;i<n*2;i++)
+			cin >> a[i];
+		sort(a.begin(), a.end());
 		bool ok = false;
-		ll l;
-		multiset<ll,greater<ll>>::iterator it;
-		it = c.begin();
-		it++;
-		for (auto it2=it;it2!=c.end();it2++) {
-			b.clear();
-			multiset<ll,greater<ll>> a(c.begin(), c.end());
-			it = a.begin();
-			l = *it;
-			a.erase(it);
-			b.push_back(pl(*it2, l));
-			a.erase(a.find(*it2));
-
-			while (!a.empty()) {
-				it = a.begin(); ll k = *it; a.erase(it);
-				if (a.count(l-k) == 0) break;
-				a.erase(a.find(l-k));
-				b.push_back(pl(l-k, k));
-				l = k;
-
+		for (i=0;i<n * 2 - 1;i++) {
+			for (k=0;k<n*2;k++) cnt[a[k]] = 0;
+			for (k=0;k<n*2;k++) cnt[a[k]]++;
+			ll x = a[i] + a[n*2-1];
+			j = n * 2 - 1;
+			for (k=0;k<n;k++) {
+				while (cnt[a[j]] == 0 && j > 0) j--;
+				ll s = x - a[j];
+				cnt[s]--;
+				cnt[a[j]]--;
+				r[k*2] = s;
+				r[k*2+1] = a[j];
+				if (cnt[s] < 0 || cnt[a[j]] < 0) {
+					break;
+				}
+				x = max(s, a[j]);
 			}
-			if (a.empty()) {
+			if (k == n) {
 				ok = true;
 				break;
 			}
 		}
-		if (!ok) {
-			cout << "NO\n";
-		} else {
+		for (k=0;k<n*2;k++) cnt[a[k]] = 0;
+		if (ok) {
 			cout << "YES\n";
-			cout << b[0].first + b[0].second << endl;
-			for (pl &p : b) {
-				cout << p.first << " " << p.second << endl;
+			cout << r[0] + r[1] << endl;
+			for (i=0;i<n;i++) {
+				cout << r[i*2] << ' ' << r[i*2+1] << endl;
 			}
-		}
+		} else
+			cout << "NO\n";
 	}
 	return 0;
 }
