@@ -12,26 +12,23 @@ int main() {
 	ll T, i, j, k, x, ans;
 	cin >> T;
 	while(T--) {
-		ll hp, ap;
+		ll ap, hp, t;
 		cin >> ap >> hp >> n;
 		ans = 0;
-		vector<pl> a(n);
-		for (i=0;i<n;i++)
-			cin >> a[i].first;
-		for (i=0;i<n;i++)
-			cin >> a[i].second;
-		sort(a.begin(), a.end(), [&](const pl lhs, const pl rhs) {
-			if (lhs.second == lhs.second) return lhs.first < rhs.first;
-			else return lhs.second < rhs.second;
-		});
-		ll map=0, mhp=0;
-		for (i=0;i<n && hp;i++) {
-			map = a[i].first;
-			mhp = a[i].second;
-			ll t = (mhp+ap-1) / ap;
-			hp -= t * map;
+		vector<ll> a(n), b(n);
+		for (i=0;i<n;i++) cin >> a[i];
+		for (i=0;i<n;i++) cin >> b[i];
+		ll dmg=0;
+		for (i=0;i<n;i++) {
+			t = (b[i] + ap - 1ull) / ap;
+			dmg += t * a[i];
 		}
-		if (i == n && hp > -map)
+		bool ok = false;
+		for (i=0;i<n;i++) {
+			if (hp - dmg + a[i] > 0)
+				ok = true;
+		}
+		if (ok)
 			cout << "YES\n";
 		else
 			cout << "NO\n";
