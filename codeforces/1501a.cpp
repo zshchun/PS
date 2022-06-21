@@ -13,24 +13,21 @@ int main() {
 	cin >> T;
 	while(T--) {
 		cin >> n;
-		vector<ll> a(n);
-		vector<ll> b(n);
-		vector<ll> tm(n);
-		ans = 0;
-		for (i=0;i<n;i++)
+		vector<ll> a(n+1);
+		vector<ll> b(n+1);
+		vector<ll> tm(n+1);
+		a[0] = b[0] = 0;
+		for (i=1;i<=n;i++)
 			cin >> a[i] >> b[i];
-		for (i=0;i<n;i++)
+		for (i=1;i<=n;i++)
 			cin >> tm[i];
-		ll g = 0;
-		for (i=0;i<n-1;i++) {
-			ll md = (b[i]-a[i]+1)/2;
-			a[i] += g + tm[i];
-			ll c = max(a[i]+md, b[i]);
-			if (b[i] < c)
-				g = c-b[i];
-			else g = 0;
+		ll cur = 0;
+		for (i=1;i<=n;i++) {
+			cur += a[i] - b[i-1] + tm[i];
+			if (i == n) break;
+			cur = max(cur+(b[i]-a[i]+1)/2, b[i]);
 		}
-		cout << g+tm[n-1]+a[n-1] << endl;
+		cout << cur << endl;
 	}
 	return 0;
 }
