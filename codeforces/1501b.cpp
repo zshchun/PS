@@ -13,33 +13,15 @@ int main() {
 	cin >> T;
 	while(T--) {
 		cin >> n;
-		vector<pl> a;
+		vector<ll> a(n+2, 0);
 		for (i=1;i<=n;i++) {
 			cin >> x;
-			if (x > 0) {
-				ll d = max(1ll, i-x+1);
-				a.push_back(pl(d, i));
-			}
+			a[max(1ll, i-x+1)]++;
+			a[i+1]--;
 		}
-		sort(a.begin(), a.end());
-		vector<ll> b(n+1, 0);
-		ll l = 0;
-		for (i=0;i<a.size();i++) {
-			ll d = a[i].first;
-			ll u = a[i].second;
-			if (u < l) continue;
-			if (d < l) d = l;
-			for (j=d;j<=u;j++) {
-				b[j] = 1;
-			}
-			l = u;
-		}
-
 		for (i=1;i<=n;i++) {
-			if (b[i])
-				cout << "1 ";
-			else
-				cout << "0 ";
+			a[i] += a[i-1];
+			cout << (a[i] ? "1 " : "0 ");
 		}
 		cout << endl;
 	}
