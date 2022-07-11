@@ -14,24 +14,27 @@ int main() {
 	cin >> T;
 	while(T--) {
 		cin >> n >> k;
-		ans = 0;
 		vector<ll> a(n);
 		vector<ll> b(n);
-		map<ll,ll> s;
-		map<ll,ll> e;
 		for (i=0;i<n;i++) {
 			cin >> a[i];
+			b[i] = a[i];
 		}
+		sort(b.begin(), b.end());
+		b.erase(unique(b.begin(), b.end()), b.end());
+		vector<ll> s(b.size(), 0);
+		vector<ll> e(b.size(), 0);
 		for (i=0;i<n;i++) {
-			e[a[i]] = i+1;
-			if (s.find(a[i]) == s.end())
-				s[a[i]] = i+1;
+			j = lower_bound(b.begin(), b.end(), a[i]) - b.begin();
+			e[j] = i+1;
+			if (!s[j]) s[j] = i+1;
 		}
 		for (i=0;i<k;i++) {
-			cin >> l >> r;
-			auto ss = s.find(l);
-			auto ee = e.find(r);
-			if (ss != s.end() && ee != e.end() && ss->second < ee->second)
+			ll from, to;
+			cin >> from >> to;
+			ll f = lower_bound(b.begin(), b.end(), from) - b.begin();
+			ll t = lower_bound(b.begin(), b.end(), to) - b.begin();
+			if (f < b.size() && t < b.size() && b[f] == from && b[t] == to && s[f] && e[t] && s[f] < e[t]) 
 				cout << "YES\n";
 			else
 				cout << "NO\n";
