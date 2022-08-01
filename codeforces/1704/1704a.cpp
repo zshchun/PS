@@ -15,24 +15,13 @@ int main() {
 	while(T--) {
 		cin >> n >> m;
 		ans = 0;
-		string s1, s2, t;
-		cin >> s1 >> s2;
-		j = s1.size()-1;
-		ll p = 0;
-		for (i=s2.size()-1;i>=0;i--) {
-			while (j >=0 && s1[j] != s2[i]) {
-				j--;
-				p = i;
-			}
-			if (j >=0 && s1[j] == s2[i]) {
-				ans++;
-				j--;
-			}
-		}
-		if (ans == s2.size() && p < 1)
-			cout << "YES\n";
-		else
+		string a, b;
+		cin >> a >> b;
+		if (a.substr(n-m+1) != b.substr(1) || a.find(b[0]) > n-m) {
 			cout << "NO\n";
+			continue;
+		}
+		cout << "YES\n";
 	}
 	return 0;
 }
