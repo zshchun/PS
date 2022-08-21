@@ -17,18 +17,11 @@ int main() {
 	cin >> T;
 	while(T--) {
 		cin >> n >> m;
-		ans = 0;
-		ll mx = max(n, m);
-		ll mn = min(n, m);
 		if (n == 1 && m == 1) {
-			cout << max(n, m)-1 << endl;
-			continue;
-		} else if (n == 1 || m == 1) {
-			cout << max(n, m) << endl;
+			cout << 0 << endl;
 			continue;
 		}
-		ans = (mn-1) * 2 + mx;
-		cout << ans << endl;
+		cout << n + m - 2 + min(n, m) << endl;
 	}
 	return 0;
 }
