@@ -7,56 +7,35 @@ typedef pair<ll,ll> pa;
 #define endl "\n"
 #define MOD 1000000007
 #define INF (1LL<<60)
-ll n, m;
+ll n, m, ans;
 
 int main() {
 	ios_base::sync_with_stdio(false);
+
 	cin.tie(0);
-	ll T, i, j, k, z, l, r;
+	ll T, i, j, k, z, l, r, q;
 	cin >> T;
 	while(T--) {
-		ll q, mq=0, mx=0, last=0;
+		ll mx = 0;
 		cin >> n >> q;
-		vector<pa> a(n);
-		vector<ll> v(n+1);
+		vector<ll> a(n);
+		vector<vector<ll>> w(n);
 		for (i=0;i<n;i++) {
-			cin >> a[i].first;
-			a[i].second = i;
-			if (mx < a[i].first) {
-				mx = a[i].first;
-				last = i;
+			cin >> a[i];
+			if (i > 0) {
+				if (a[i] > a[mx]) mx = i;
+				w[mx].push_back(i);
 			}
 		}
-		vector<ll> ans(q);
-		vector<pair<ll,pa>> qs(q);
 		for (i=0;i<q;i++) {
-			cin >> qs[i].second.first >> qs[i].first;
-			qs[i].first--;
-			qs[i].second.first--;
-			qs[i].second.second = i;
-		}
-		sort(qs.begin(), qs.end());
-		j = 0;
-		k = 0;
-		for (i=1;i<=last;i++) {
-			if (a[k].first < a[i].first) {
-				k = i;
+			cin >> l >> k;
+			l--;
+			ans = lower_bound(w[l].begin(), w[l].end(), k+1) - w[l].begin();
+			if (mx == l) {
+				ans += max(0ll, k - n + 1);
 			}
-			v[a[k].second]++;
-			while (j < qs.size() && qs[j].first == i-1) {
-				ans[qs[j].second.second] = v[qs[j].second.first];
-				j++;
-			}
+			cout << ans << endl;
 		}
-
-		for (;j<qs.size();j++) {
-			ans[qs[j].second.second] = v[qs[j].second.first];
-			if (qs[j].second.first == last && qs[j].first >= last) {
-				ans[qs[j].second.second] += (qs[j].first-last+1);
-			}
-		}
-		for (i=0;i<q;i++)
-			cout << ans[i] << endl;
 	}
 	return 0;
 }
