@@ -39,7 +39,7 @@ int main() {
 	if (mn == MAX) mn = 0;
 	if (mx == MIN) mx = 0;
 
-		cout << round(s / (float)n) << "\n";
+		cout << ll(round(s / (float)n)) << "\n";
 	cout << median << "\n";
 	cout << mode << "\n";
 	cout << a[n-1] - a[0] << "\n";
