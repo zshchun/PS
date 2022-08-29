@@ -1,24 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
+typedef long long ll;
+enum MODE {
+	SPACE,
+	WORD,
+};
 int main() {
 	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-	char a[1000001];
-	int m = 0, i = 0;
-	char *c = a;
-	cin.getline(c, 1000000);
-	do {
-		while (*c && *c != ' ') {
-			m = 1;
-			c++;
+	cin.tie(0);
+	string s;
+	getline(cin, s);
+	ll i, ans=0;
+	enum MODE mode = SPACE;
+	for (i=0;i<s.size();i++) {
+		if (s[i] == ' ') {
+			mode = SPACE;
+		} else {
+			if (mode == SPACE) {
+				mode = WORD;
+				ans++;
+			}
 		}
-		if (m) { 
-			i++;
-			m = 0;
-		}
-	} while (*c++);
-	cout << i << "\n";
+	}
+	cout << ans << '\n';
 	return 0;
 }
-
