@@ -1,5 +1,5 @@
 [BOJ](https://www.acmicpc.net/) (Baekjoon Online Judge)
 -----------------
-- BRONZE : 79
+- BRONZE : 80
 - SILVER : 91
-- GOLD : 53
+- GOLD : 54
