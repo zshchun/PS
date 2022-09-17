@@ -12,39 +12,28 @@ ll n, m, ans;
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(0);
-	ll TC, i, j, k, l, r, c, q, sz, pos;
+	ll TC, i, j, k, c, q, l, r;
 	cin >> TC;
 	while(TC--) {
 		cin >> n >> c >> q;
 		string s;
 		cin >> s;
-		pos = n;
-		vector<pa> a;
-		a.push_back(pa(0, 0));
+		vector<ll> pos, sz;
+		pos.push_back(0);
+		sz.push_back(n);
 		for (i=0;i<c;i++) {
-			cin >> j >> k;
-			j--;
-			a.push_back(pa(pos, j));
-			pos += k - j;
+			cin >> l >> r;
+			l--;
+			pos.push_back(l);
+			sz.push_back(sz.back()+r-l);
 		}
-		a.push_back(pa(pos, pos));
-		sort(a.begin(), a.end());
-		for (i=0;i<q;i++) {
-			cin >> j;
-			j--;
-			while (j >= s.size()) {
-				l = 0;
-				r = a.size()-1;
-				while (r-l > 1) {
-					m = (r + l) >> 1;
-					if (j >= a[m].first)
-						l = m;
-					else if (j < a[m].first)
-						r = m;
-				}
-				j = a[l].second + (j - a[l].first);
-			}
-			cout << s[j] << endl;
+		while (q--) {
+			cin >> k;
+			k--;
+			for (i=c;i>0;i--)
+				if (k >= sz[i-1])
+					k = pos[i] + (k - sz[i-1]);
+			cout << s[k] << endl;
 		}
 	}
 	return 0;
