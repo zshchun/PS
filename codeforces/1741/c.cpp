@@ -26,24 +26,28 @@ int main() {
 				s[i] = a[i];
 		}
 		ll ans = INF;
+		ll sum, prev;
+		bool ok;
 		for (i=0;i<n;i++) {
-			ll mx = s.back();
-			if (mx % s[i] != 0) continue;
-			bool ok = true;
-			ll idx = i;
-			k = i + 1;
-			for (j=2;j<=mx/s[i];j++) {
-				auto p = lower_bound(s.begin(), s.end(), s[i] * j);
-				if (p == s.end() || *p != s[i] * j) {
+			prev = i;
+			sum = 0;
+			ok = true;
+			k = i+1;
+			for (j=i+1;j<n;j++) {
+				sum += a[j];
+				if (sum == s[i]) {
+					sum = 0;
+					k = max(k, j-prev);
+					prev = j;
+				} else if (sum > s[i]) {
 					ok = false;
 					break;
 				}
-				ll x = p - s.begin();
-				k = max(k, x-idx);
-				idx = x;
 			}
-			if (ok) {
+			if (!sum && ok) {
 				ans = min(k, ans);
+			} else {
+				ans = min(n, ans);
 			}
 		}
 		cout << ans << endl;
