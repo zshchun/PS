@@ -5,29 +5,18 @@ typedef pair<ll,ll> pa;
 #define endl "\n"
 
 int main() {
-	ll N, i;
+	ll N;
 	cin >> N;
-	bool ans = false;
-
 	vector<ll> a(N);
-	for (i=0;i<N;i++) {
+	for (ll i=0;i<N;i++)
 		cin >> a[i];
-	}
-	next_permutation(a.begin(), a.end());
-	for (i=1;i<N;i++) {
-		if (a[i-1] > a[i]) {
-			ans = true;
-			break;
-		}
-	}
-
-	if (ans) {
-		for (ll x: a) {
+	if (next_permutation(a.begin(), a.end())) {
+		for (ll x: a)
 			cout << x << ' ';
-		}
 		cout << endl;
 	} else {
 		cout << "-1\n";
 	}
+
 	return 0;
 }
