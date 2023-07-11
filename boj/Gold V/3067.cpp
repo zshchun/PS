@@ -19,9 +19,8 @@ int main() {
 
 		dp[0] = 1;
 		for (j=0;j<N;j++) {
-			for (i=1;i<=M;i++) {
-				if (i >= coin[j])
-					dp[i] += dp[i-coin[j]];
+			for (i=coin[j];i<=M;i++) {
+				dp[i] += dp[i-coin[j]];
 			}
 		}
 		cout << dp[M] << endl;
