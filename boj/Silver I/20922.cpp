@@ -15,19 +15,20 @@ int main() {
 	for (i=0;i<N;i++) {
 		cin >> a[i];
 	}
+	// two pointer
 	l = 0;
 	r = 0;
-	while (l < N) {
+	while (r < N) {
 		beg = a[l];
 		end = a[r];
-		if (cnt[beg] == K) {
-			cnt[end]--;
-			r++;
-		} else {
-			cnt[beg]++;
+		if (cnt[end] >= K) {
+			cnt[beg]--;
 			l++;
+		} else {
+			cnt[end]++;
+			r++;
 		}
-		ans = max(l - r, ans);
+		ans = max(ans, r - l);
 	}
 
 	cout << ans << endl;
