@@ -1,27 +1,21 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-typedef pair<ll,ll> pa;
 #define endl "\n"
-#define INF 1234567890123ULL
+#define INF INT32_MAX
 
-ll N, ans = INF;
-ll a[10][10];
+int N, ans = INF;
+int a[10][10];
 
-void dfs(ll s, ll p, ll visited, ll sum) {
-	if (__builtin_popcount(visited) == N && p == s) {
-		if (sum < ans)
-			ans = sum;
+void dfs(int s, int p, int visited, int sum) {
+	if (__builtin_popcount((1<<p) | visited) == N) {
+		if (a[p][s] && sum+a[p][s] < ans)
+			ans = sum + a[p][s];
 		return;
 	}
 
-	if (visited & (1 << p)) {
-		return;
-	}
-
-
-	for (ll i=0;i<N;i++) {
-		if (a[p][i] == 0)
+	for (int i=0;i<N;i++) {
+		if (a[p][i] == 0 || visited & (1<<i))
 			continue;
 		dfs(s, i, visited | (1 << p), sum + a[p][i]);
 	}
@@ -31,15 +25,15 @@ void dfs(ll s, ll p, ll visited, ll sum) {
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(0);
-	ll i, j;
+	int i, j;
 	cin >> N;
 	for (i=0;i<N;i++)
 		for (j=0;j<N;j++)
 			cin >> a[i][j];
 
-	for (i=0;i<N;i++) {
-		dfs(i, i, 0, 0);
-	}
+//	for (i=0;i<N;i++) {
+		dfs(0, 0, 0, 0);
+//	}
 
 	cout << ans << endl;
 
