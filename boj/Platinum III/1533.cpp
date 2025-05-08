@@ -12,9 +12,9 @@ ll ans[51][51];
 void mult(ll (&a)[51][51], ll (&b)[51][51]) {
 	int i, j, k;
 	ll c[51][51] = {0, };
-	for (i=0;i<N*5;i++) {
-		for (j=0;j<N*5;j++) {
-			for (k=0;k<N*5;k++) {
+	for (k=0;k<N*5;k++) {
+		for (i=0;i<N*5;i++) {
+			for (j=0;j<N*5;j++) {
 				c[i][j] += a[i][k] * b[k][j];
 				c[i][j] %= MOD;
 			}
