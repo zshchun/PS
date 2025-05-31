@@ -17,11 +17,8 @@ bool check(string s) {
 void dfs(string s, int n) {
 	int i;
 	if (n >= s.size()) return;
-	string r, t = s;
-	if (n)
-		r += s.substr(0, n);
-	if (n+1 < s.size())
-		r += s.substr(n+1);
+	string r = s, t = s;
+	r.erase(n, 1);
 	if (check(r)) {
 		ans++;
 		return;
