@@ -10,6 +10,7 @@ int main() {
 	int i, j, ans = 0;
 	string a, b;
 	cin >> a >> b;
+	// LCS Longest Common Subsequence
 	for (i=1;i<=a.size();i++) {
 		for (j=1;j<=b.size();j++) {
 			if (a[i-1] == b[j-1])
