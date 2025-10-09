@@ -8,16 +8,14 @@ typedef pair<ll,ll> pa;
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(0);
-	int i, j, k, n;
+	int i, n, j;
 	cin >> n;
 	for (i=0;i<n;i++) {
 		cin >> j;
-		k = j;
-		if (j < 0) k = -k;
-		if (k % 2 == 1)
-			cout << j << " is odd\n";
-		else
+		if (j % 2 == 0)
 			cout << j << " is even\n";
+		else
+			cout << j << " is odd\n";
 	}
 	return 0;
 }
