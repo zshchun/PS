@@ -8,6 +8,7 @@ int a[100001];
 int tree[524289];
 int pos[100001];
 
+// Segment tree
 int query(int s, int e, int n, int l, int r) {
 	if (r < s || e < l) return 0;
 	if (l <= s && e <= r)
