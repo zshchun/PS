@@ -12,7 +12,7 @@ int low[2001];
 int sccid[2001];
 bool used[2001];
 
-// Tarjan SCC (Strongly Connected Component)
+// 2-SAT, Tarjan SCC (Strongly Connected Component)
 void dfs(int u) {
 	visited[u] = low[u] = ++cnt;
 	st.push(u);
