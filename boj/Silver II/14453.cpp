@@ -29,9 +29,6 @@ int main() {
 		dp[i][SCISSORS] = dp[i-1][SCISSORS] + (a[i] == PAPER ? 1 : 0);
 	}
 	for (i=1;i<=n;i++) {
-		ans = max(ans, dp[i][HOOF]);
-		ans = max(ans, dp[i][SCISSORS]);
-		ans = max(ans, dp[i][PAPER]);
 		ans = max(ans, dp[i-1][HOOF]+dp[n][SCISSORS]-dp[i-1][SCISSORS]);
 		ans = max(ans, dp[i-1][HOOF]+dp[n][PAPER]-dp[i-1][PAPER]);
 		ans = max(ans, dp[i-1][SCISSORS]+dp[n][PAPER]-dp[i-1][PAPER]);
