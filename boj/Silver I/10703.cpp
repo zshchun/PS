@@ -6,7 +6,6 @@ typedef pair<ll,ll> pa;
 #define INF 123456789
 
 char m[3001][3001];
-char n[3001][3001];
 int x[3001];
 int g[3001];
 int ans = INF;
@@ -21,26 +20,27 @@ int main() {
 	for (i=0;i<r;i++) {
 		for (j=0;j<s;j++) {
 			cin >> m[i][j];
-			n[i][j] = m[i][j];
-			if (m[i][j] == 'X')
+			if (m[i][j] == 'X') {
 				x[j] = max(x[j], i);
-			else if (m[i][j] == '#')
+			} else if (m[i][j] == '#') {
 				g[j] = min(g[j], i);
+				if (x[j] != -INF && g[j] != INF)
+					ans = min(ans, g[j] - x[j] - 1);
+			}
 		}
 	}
 
-	for (i=0;i<s;i++)
-		if (x[i] != -INF && g[i] != INF)
-			ans = min(ans, g[i] - x[i] - 1);
-
-	for (i=r-1;i>=0;i--)
-		for (j=0;j<s;j++)
+	for (j=0;j<s;j++) {
+		for (i=r-1;i>=0;i--) {
+			if (x[j] == -INF) break;
 			if (m[i][j] == 'X')
-				swap(n[i][j], n[i+ans][j]);
+				swap(m[i][j], m[i+ans][j]);
+		}
+	}
 
 	for (i=0;i<r;i++) {
 		for (j=0;j<s;j++)
-			cout << n[i][j];
+			cout << m[i][j];
 		cout << endl;
 	}
 	return 0;
