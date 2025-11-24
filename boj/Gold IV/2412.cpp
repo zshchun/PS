@@ -5,7 +5,7 @@ typedef pair<int,int> pa;
 typedef tuple<int,int,int> tup;
 #define endl "\n"
 #define INF 123456789
-int n, T, ans = INF;
+int n, T, ans = -1;
 vector<pa> a;
 int visited[50001];
 #define X first
@@ -20,8 +20,10 @@ void bfs() {
 		tie(cur, d) = q.front();
 		q.pop();
 		tie(x, y) = a[cur];
-		if (y == T)
-			ans = min(ans, d);
+		if (y == T) {
+			ans = d;
+			break;
+		}
 		lx = max(0, x-2); ly = max(0, y-2);
 		int s = lower_bound(a.begin(), a.end(), pa(lx, ly)) - a.begin();
 		int e = upper_bound(a.begin(), a.end(), pa(x+2, y+2)) - a.begin();
@@ -46,8 +48,6 @@ int main() {
 	a[0].X = a[0].Y = 0;
 	sort(a.begin(), a.end());
 	bfs();
-	if (ans == INF)
-		ans = -1;
 	cout << ans << endl;
 	return 0;
 }
