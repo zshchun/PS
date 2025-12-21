@@ -5,13 +5,13 @@ typedef pair<ll,ll> pa;
 #define endl "\n"
 #define INF 123456789
 bool g[901][901];
-bool used[901];
 int cnt[901];
 int K, N, F;
+vector<int> selected;
 
 bool is_mutual_friend(int x) {
-	for (int i=1;i<x;i++)
-		if (used[i] && !g[x][i])
+	for (int i : selected)
+		if (!g[x][i])
 			return false;
 	return true;
 }
@@ -20,16 +20,15 @@ void backtrack(int x, int k) {
 	if (!is_mutual_friend(x))
 		return;
 
-	used[x] = 1;
+	selected.push_back(x);
 	if (k == K) {
-		for (int i=1;i<=N;i++)
-			if (used[i])
-				cout << i << endl;
+		for (int i : selected)
+			cout << i << endl;
 		exit(0);
 	}
 	for (int i=x+1;i<=N;i++)
 		backtrack(i, k+1);
-	used[x] = 0;
+	selected.pop_back();
 }
 
 int main() {
