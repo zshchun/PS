@@ -6,6 +6,7 @@ typedef pair<ll,ll> pa;
 #define INF 1234567890
 ll dp[101][101];
 
+// pascal's triangle
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(0);
