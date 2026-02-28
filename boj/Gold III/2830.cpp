@@ -24,10 +24,8 @@ int main() {
 	for (j=0;j<20;j++)
 		zero[j] = N - one[j];
 
-	for (i=0;i<N;i++)
-		for (j=0;j<20;j++)
-			if (a[i] & (1<<j))
-				ans += zero[j] * (1ull << j);
+	for (j=0;j<20;j++)
+		ans += zero[j] * one[j] * (1ull << j);
 
 	cout << ans << endl;
 	return 0;
