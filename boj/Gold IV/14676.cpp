@@ -16,26 +16,35 @@ int main() {
 	cin >> N >> M >> K;
 	for (i=0;i<M;i++) {
 		cin >> u >> v;
-		g[v].push_back(u);
+		g[u].push_back(v);
+		ind[v]++;
 	}
+	bool possible = true;
 	for (i=0;i<K;i++) {
 		cin >> u >> v;
 		if (u == 1) {
-			for (int x : g[v]) {
-				if (built[x] == 0) {
-					cout << "Lier!\n";
-					return 0;
-				}
+			if (ind[v]) {
+				possible = false;
+				break;
 			}
 			built[v]++;
+			if (built[v] == 1) 
+				for (int x : g[v])
+					ind[x]--;
 		} else if (u == 2) {
 			if (built[v] == 0) {
-				cout << "Lier!\n";
-				return 0;
+				possible = false;
+				break;
 			}
 			built[v]--;
+			if (built[v] == 0)
+				for (int x : g[v])
+					ind[x]++;
 		}
 	}
-	cout << "King-God-Emperor\n";
+	if (possible)
+		cout << "King-God-Emperor\n";
+	else
+		cout << "Lier!\n";
 	return 0;
 }
